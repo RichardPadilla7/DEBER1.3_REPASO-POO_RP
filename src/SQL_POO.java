@@ -2,18 +2,20 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.util.Scanner;
 
 public class SQL_POO {
-    public JButton APLASTAButton;
+    public JButton okButton;
     public JPanel panel1;
+    public JTextField consultaTxt;
+    public JLabel resultadoTxt;
+
 
     public SQL_POO() {
-        APLASTAButton.addActionListener(new ActionListener() {
+        okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 /*
-                String urls = "jdbc:mysql://localhost:3306/estudiantes2024A";
+                String urls = "jdbc:mysql://localhost:3306/estudiantes2024a";
                 String user = "root";
                 String password = "123456";
 
@@ -53,29 +55,53 @@ public class SQL_POO {
                 }
             }
         });*/
+
                 String url = "jdbc:mysql://localhost:3306/estudiantes2024a";
                 String user = "root";
-                String password = "";
+                String password = "123456";
 
                 try (Connection connection = DriverManager.getConnection(url, user, password)) {
                     System.out.println("Conectado a la base de datos");
-                    String query = "select * from estudiantes where cedula=1736492203";
+                    String query = "select * from estudiantes where cedula='" + consultaTxt.getText()+"'";
+
                     Statement statement = connection.createStatement();
                     ResultSet resultSet = statement.executeQuery(query);
-                    while (resultSet.next()) {
-                        System.out.println(resultSet.getString("nombre"));
-                        nombreTxt.setText(resultSet.getString("nombre"));
+
+                    if (resultSet.next()) {
+                        String nombre = resultSet.getString("nombre");
+                        String cedula = resultSet.getString("cedula");
+                        int bimestreUno = resultSet.getInt("b1");
+                        int bimestreDos = resultSet.getInt("b2");
+
+                        int sumaBimestres = bimestreUno + bimestreDos;
+                        int promedio = sumaBimestres / 2;
+
+                        resultadoTxt.setText("Nombre del estudiante: " + nombre + "\n" +
+                                "Cedula: " + cedula + "\n" +
+                                "Nota 1: " + bimestreUno + "\n" +
+                                "Nota 2: " + bimestreDos + "\n" +
+                                "Promedio: " + promedio);
+
+
+                    } else {
+                        resultadoTxt.setText("Estudiante no encontrado");
                     }
                 } catch (SQLException ex) {
-                    System.out.println(ex.getMessage());
+                    System.out.println("Error al ejecutar la consulta: " + ex.getMessage());
                 }
             }
         });
 
+        consultaTxt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+    }
 
     }
-}
+
 
 
 
