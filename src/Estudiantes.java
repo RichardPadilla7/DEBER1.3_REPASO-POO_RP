@@ -8,10 +8,10 @@ public class Estudiantes {
     public JPanel panel1;
     public JTextField consultaTxt;
     public JLabel resultadoTxt;
-    private JTextArea bcrCedula;
-    private JTextField consulta12Txt;
-    private JTextArea bcrNombre;
-    private JButton okbutton2;
+    public JTextArea bcrCedula;
+    public JTextField consulta12Txt;
+    public JTextArea bcrNombre;
+    public JButton okbutton2;
 
 
     public Estudiantes() {
@@ -33,11 +33,11 @@ public class Estudiantes {
                         if (resultSet.next()) {
                             String nombre = resultSet.getString("nombre");
                             String cedula = resultSet.getString("cedula");
-                            int bimestreUno = resultSet.getInt("b1");
-                            int bimestreDos = resultSet.getInt("b2");
+                            double bimestreUno = resultSet.getInt("b1");
+                            double bimestreDos = resultSet.getInt("b2");
 
-                            int sumaBimestres = bimestreUno + bimestreDos;
-                            int promedio = sumaBimestres / 2;
+                            double sumaBimestres = bimestreUno + bimestreDos;
+                            double promedio = sumaBimestres / 2;
 
                             resultadoTxt.setText("<html>Nombre del estudiante: " + nombre + "<br>" +
                                     "Cedula: " + cedula + "<br>" +
@@ -83,11 +83,11 @@ public class Estudiantes {
                         if (resultSet.next()) {
                             String nombre = resultSet.getString("nombre");
                             String cedula = resultSet.getString("cedula");
-                            float  bimestreUno = resultSet.getInt("b1");
-                            float bimestreDos = resultSet.getInt("b2");
+                            double  bimestreUno = resultSet.getInt("b1");
+                            double bimestreDos = resultSet.getInt("b2");
 
-                            float sumaBimestres = bimestreUno + bimestreDos;
-                            float promedio = sumaBimestres / 2;
+                            double sumaBimestres = bimestreUno + bimestreDos;
+                            double promedio = sumaBimestres / 2;
 
                             resultadoTxt.setText("<html>Nombre del estudiante: " + nombre + "<br>" +
                                     "Cedula: " + cedula + "<br>" +
