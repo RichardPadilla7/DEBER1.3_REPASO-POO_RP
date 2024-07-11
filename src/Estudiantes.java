@@ -83,11 +83,11 @@ public class Estudiantes {
                         if (resultSet.next()) {
                             String nombre = resultSet.getString("nombre");
                             String cedula = resultSet.getString("cedula");
-                            int bimestreUno = resultSet.getInt("b1");
-                            int bimestreDos = resultSet.getInt("b2");
+                            float  bimestreUno = resultSet.getInt("b1");
+                            float bimestreDos = resultSet.getInt("b2");
 
-                            int sumaBimestres = bimestreUno + bimestreDos;
-                            int promedio = sumaBimestres / 2;
+                            float sumaBimestres = bimestreUno + bimestreDos;
+                            float promedio = sumaBimestres / 2;
 
                             resultadoTxt.setText("<html>Nombre del estudiante: " + nombre + "<br>" +
                                     "Cedula: " + cedula + "<br>" +
@@ -98,7 +98,7 @@ public class Estudiantes {
                             resultadoTxt.setText("Estudiante no encontrado");
                         }
                     } catch (SQLException ex) {
-                        System.out.println("Error al ejecutar la consulta: " + ex.getMessage());
+                        System.out.println("Error al ejecutar los datos!." + ex.getMessage());
                     }
             }
         });
